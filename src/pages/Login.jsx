@@ -7,12 +7,14 @@ import { Input } from '../components/ui/Input';
 import { GoogleIcon } from '../components/ui/GoogleIcon';
 import { TypewriterText } from '../components/ui/TypewriterText';
 
+import { useTheme } from '../lib/ThemeContext';
+
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [theme, setTheme] = useState('light'); // Minimal theme state for UI
+  const { theme, toggleTheme } = useTheme();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
@@ -43,15 +45,23 @@ export default function Login() {
     }
   };
 
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-    // Note: To fully support dark mode, you'd toggle a 'dark' class on document.documentElement here
-  };
-
   return (
-    <div className={`flex min-h-screen w-full flex-col bg-surface ${theme}`}>
+    <div className="flex min-h-screen w-full flex-col bg-surface transition-colors duration-300 relative overflow-hidden">
+      
+      {/* Global Unified Background Elements */}
+      <div className="absolute inset-0 pointer-events-none z-0">
+        {/* Subtle glowing spotlight */}
+        <div className="absolute inset-0 flex items-center justify-center lg:justify-end lg:pr-[12%]">
+          <div className="h-[500px] w-[500px] rounded-full bg-brand-500/10 dark:bg-brand-500/20 blur-[120px]" />
+        </div>
+        
+        {/* Subtle grid pattern overlay */}
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA0MCAwIEwgMCAwIDAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgwLCAwLCAwLCAwLjA0KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] dark:hidden" />
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA0MCAwIEwgMCAwIDAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjA0KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] hidden dark:block" />
+      </div>
+
       {/* Auth Navbar (Global Full-Width) */}
-      <header className="flex h-[72px] shrink-0 items-center justify-between border-b border-border bg-surface/70 backdrop-blur-xl px-4 md:px-8 sticky top-0 z-10 transition-colors">
+      <header className="relative z-10 flex h-[72px] shrink-0 items-center justify-between px-4 md:px-8 sticky top-0 transition-colors">
         <div className="flex items-center gap-2.5">
           <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-ink-900 text-canvas">
             <Sprout size={18} />
@@ -61,7 +71,7 @@ export default function Login() {
         <div className="flex items-center gap-2">
           <button 
             onClick={toggleTheme}
-            className="flex h-9 w-9 items-center justify-center rounded-full text-ink-400 transition-colors hover:bg-ink-900/5 hover:text-ink-600"
+            className="flex h-9 w-9 items-center justify-center rounded-full text-ink-700 transition-colors hover:bg-ink-900/5 dark:hover:bg-white/10 hover:text-ink-900"
             aria-label="Toggle theme"
           >
             {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
@@ -70,7 +80,7 @@ export default function Login() {
       </header>
 
       {/* Main Content Split */}
-      <div className="flex h-[calc(100vh-72px)] w-full">
+      <div className="relative z-10 flex h-[calc(100vh-72px)] w-full">
         {/* Left Column - Form */}
         <div className="flex h-full w-full flex-col px-6 md:px-16 lg:w-1/2 xl:px-24">
           <motion.div 
@@ -132,10 +142,10 @@ export default function Login() {
 
             <div className="relative my-5">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-border"></div>
+                <div className="w-full border-t border-border dark:border-white/10"></div>
               </div>
               <div className="relative flex justify-center">
-                <span className="bg-surface px-4 text-ink-400 text-[11px] font-medium uppercase tracking-wider">Or continue with</span>
+                <span className="bg-surface px-4 text-ink-400 dark:text-ink-400 text-[11px] font-medium uppercase tracking-wider">Or continue with</span>
               </div>
             </div>
 
@@ -162,22 +172,11 @@ export default function Login() {
         </div>
 
         {/* Right Column - Brand/Decorative */}
-        <div className="relative hidden w-1/2 overflow-hidden bg-[#0A1017] dark:bg-surface lg:block transition-colors">
-          
-          {/* Subtle glowing spotlight to ground the text */}
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="h-96 w-96 rounded-full bg-[#10b981] opacity-5 dark:opacity-10 blur-[100px]" />
-          </div>
-          
-          {/* Subtle grid pattern overlay */}
-          <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSA0MCAwIEwgMCAwIDAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0icmdiYSgyNTUsIDI1NSwgMjU1LCAwLjA0KSIgc3Ryb2tlLXdpZHRoPSIxIi8+PC9wYXR0ZXJuPjwvZGVmcz48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2dyaWQpIi8+PC9zdmc+')] opacity-20" />
-
+        <div className="hidden w-1/2 flex-col items-center justify-center lg:flex">
           {/* Simple Typing Animation */}
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <h2 className="font-display text-4xl font-medium tracking-wide text-white drop-shadow-sm">
-              <TypewriterText text="Achieve your goals :)" />
-            </h2>
-          </div>
+          <h2 className="font-display text-4xl font-medium tracking-wide text-ink-900 dark:text-white drop-shadow-sm">
+            <TypewriterText text="Achieve your goals :)" />
+          </h2>
         </div>
       </div>
     </div>

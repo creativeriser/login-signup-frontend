@@ -14,7 +14,7 @@ export const Input = forwardRef(function Input({ className, label, id, ...props 
         ref={ref}
         id={id}
         className={cn(
-          'h-10 rounded border border-border/80 bg-canvas dark:bg-surface/50 px-3 text-[14px] text-ink-900 placeholder:text-ink-400 shadow-xs',
+          'h-10 rounded border border-border/80 bg-canvas dark:bg-black/20 dark:border-white/10 px-3 text-[14px] text-ink-900 placeholder:text-ink-400 shadow-xs',
           'transition-all outline-none focus-visible:border-brand-500 focus-visible:ring-2 focus-visible:ring-brand-500/30 focus-visible:ring-offset-0',
           'disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-surface/50',
           className

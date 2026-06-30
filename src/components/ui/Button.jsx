@@ -4,7 +4,7 @@ import { cn } from '../../lib/utils'
 const VARIANTS = {
   primary: 'bg-ink-900 text-canvas hover:bg-ink-900/90 shadow-sm border border-transparent dark:border-white/10',
   brand: 'bg-brand-600 text-canvas hover:bg-brand-700 shadow-sm border border-transparent dark:border-white/10',
-  secondary: 'bg-surface text-ink-900 border border-border/80 hover:bg-ink-900/5 dark:hover:bg-white/5 shadow-sm',
+  secondary: 'bg-surface dark:bg-black/20 text-ink-900 border border-border/80 dark:border-white/10 hover:bg-ink-900/5 dark:hover:bg-white/5 shadow-sm',
   ghost: 'bg-transparent text-ink-600 hover:bg-ink-900/5 dark:hover:bg-white/5 hover:text-ink-900 dark:hover:text-ink-900',
   danger: 'bg-surface text-ember-600 border border-ember-200 hover:bg-ember-100/50 shadow-sm dark:border-ember-500/20 dark:hover:bg-ember-500/10 dark:text-ember-400',
 }
