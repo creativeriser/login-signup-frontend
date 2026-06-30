@@ -47,6 +47,7 @@ const Dashboard = () => {
 
   const handleLogout = async () => {
     try {
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:8888';
       await fetch(`${API_URL}/pages/logout`, { method: 'POST' });
     } catch (e) {
       // Ignore errors
